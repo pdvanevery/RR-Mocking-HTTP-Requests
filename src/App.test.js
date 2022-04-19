@@ -18,3 +18,10 @@ test("receives GitHub name from GitHub REST API using jest fetch mock", async ()
   })
 
 
+test('link to GitHub button', async () => {
+    fetch.mockResponseOnce(JSON.stringify({url: 'www.myfakegithubprofileurl.com'}))
+    render(<App />)
+    
+    const gitHubURL = await waitFor(() => screen.getByRole('link'))
+    expect(gitHubURL).toHaveAttribute('href', 'www.myfakegithubprofileurl.com')
+})
